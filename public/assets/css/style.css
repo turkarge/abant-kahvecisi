@@ -1,0 +1,868 @@
+/* assets/css/style.css */
+
+/* ----------------------------------------------------------------
+    0. Genel Ayarlar ve Değişkenler (Güncellenmiş Sıcak Palet)
+-----------------------------------------------------------------*/
+:root {
+    --tblr-font-sans-serif: 'Inter', sans-serif;
+    --font-serif-headings: 'Lora', serif;
+
+    /* GÜNCELLENMİŞ SICAK RENK PALETİ */
+    --abant-primary-color: #7a5c58;
+    --abant-secondary-color: #a47556;
+    --abant-accent-color: #c89f68;
+    --abant-text-color: #3b3b3b;
+    --abant-light-text-color: #ffffff;
+    --abant-bg-light: #EFEBE4;
+    --abant-card-bg: #FFFFFF;
+    --abant-border-color: #dcd5ca;
+
+    --tblr-primary: var(--abant-accent-color);
+    --tblr-link-color: var(--abant-secondary-color);
+    --tblr-link-hover-color: var(--abant-primary-color);
+    --tblr-body-color: var(--abant-text-color);
+    --tblr-body-bg: var(--abant-bg-light);
+    --tblr-heading-color: var(--abant-primary-color);
+}
+
+/* ----------------------------------------------------------------
+    1. Temel HTML Elemanları ve Tipografi
+-----------------------------------------------------------------*/
+body {
+    font-family: var(--tblr-font-sans-serif);
+    color: var(--abant-text-color);
+    background-color: var(--abant-bg-light);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-serif-headings);
+    font-weight: 600;
+    color: var(--abant-primary-color);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+.page-title {
+     font-family: var(--font-serif-headings);
+     color: var(--abant-primary-color);
+     font-weight: 700;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--tblr-link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--tblr-link-hover-color);
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------------------------
+    2. Navigasyon (Header) - Logo Ortada ve Yeni Menü Düzeni
+-----------------------------------------------------------------*/
+.navbar-light {
+    background-color: rgba(255, 255, 255, 0.97) !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    position: sticky; /* Zaten HTML'de var ama CSS'te de belirtmek iyi olabilir */
+    top: 0;
+    z-index: 1030; /* Navbar'ın kendisi için yüksek z-index */
+}
+
+/* Navbar içindeki ana container (logo ve menü linklerini tutan) */
+#navbar-menu-main.navbar-collapse {
+    display: flex !important; /* Masaüstünde her zaman flex */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Sol Menü Grubu */
+#navbar-menu-main > .navbar-nav.me-auto {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+/* Ortadaki Logo (Masaüstü için) */
+.navbar-brand.mx-auto {
+    flex-grow: 0;
+    flex-shrink: 1; /* Gerekirse biraz küçülebilir */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.navbar-brand img {
+    max-height: 50px;
+    width: auto;
+}
+
+/* Sağ Sosyal Medya Grubu */
+#navbar-menu-main > .navbar-nav.ms-auto {
+    flex-grow: 1;
+    flex-basis: 0;
+    justify-content: flex-end;
+}
+#navbar-menu-main > .navbar-nav.ms-auto .nav-link {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+}
+#navbar-menu-main > .navbar-nav.ms-auto .nav-link .icon-md {
+    font-size: 1.2rem;
+    color: var(--abant-secondary-color);
+}
+#navbar-menu-main > .navbar-nav.ms-auto .nav-link:hover .icon-md {
+    color: var(--abant-accent-color);
+}
+
+/* Genel menü linkleri (Sol menü için) */
+.navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-link {
+    color: var(--abant-primary-color) !important;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    text-transform: uppercase;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+.navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-link:hover,
+.navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-link.active {
+    color: var(--abant-accent-color) !important;
+}
+
+/* Aktif menü öğesi için alt çizgi */
+.navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-item.active > .nav-link {
+    position: relative;
+}
+.navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-item.active > .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 2px;
+    background-color: var(--abant-accent-color);
+}
+
+/* Dropdown Menü Stilleri */
+.dropdown-menu {
+    border-color: var(--abant-border-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 0.25rem;
+}
+.dropdown-item {
+    font-size: 0.88rem;
+    color: var(--abant-text-color);
+    padding: 0.6rem 1.25rem;
+    font-weight: 500;
+}
+.dropdown-item:hover,
+.dropdown-item.active {
+    background-color: var(--abant-accent-color) !important;
+    color: var(--abant-light-text-color) !important;
+}
+.navbar-nav .dropdown-menu { /* Tabler'da bazen varsayılan margin fazla olabilir */
+    margin-top: 0.125rem;
+}
+.navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-item.dropdown.active > .nav-link {
+    color: var(--abant-accent-color) !important;
+}
+
+/* Mobil için navbar-toggler */
+.navbar-toggler {
+    border-color: transparent;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* ----------------------------------------------------------------
+    3. Ana Sayfa Slider (Swiper.js)
+-----------------------------------------------------------------*/
+.main-slider-section {
+    width: 100%;
+    height: 75vh;
+    min-height: 450px;
+    max-height: 700px;
+    position: relative;
+    overflow: hidden;
+}
+.main-slider .swiper-slide {
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--abant-light-text-color);
+}
+.main-slider .slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+    z-index: 1;
+}
+.main-slider .slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+    padding: 20px;
+}
+.main-slider .slide-content .display-4 {
+    color: var(--abant-light-text-color);
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    font-weight: 700;
+    font-size: 3rem;
+}
+@media (min-width: 768px) {
+    .main-slider .slide-content .display-4 {
+        font-size: 3.8rem;
+    }
+}
+.main-slider .slide-content .lead {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    opacity: 0.9;
+}
+@media (min-width: 768px) {
+    .main-slider .slide-content .lead {
+        font-size: 1.3rem;
+    }
+}
+.main-slider .swiper-button-next,
+.main-slider .swiper-button-prev {
+    color: var(--abant-light-text-color);
+    background-color: rgba(0,0,0,0.25);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    --swiper-navigation-size: 22px;
+}
+.main-slider .swiper-button-next:hover,
+.main-slider .swiper-button-prev:hover {
+    background-color: rgba(0,0,0,0.45);
+}
+.main-slider .swiper-pagination-bullet {
+    background-color: var(--abant-light-text-color);
+    opacity: 0.6;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px !important;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+.main-slider .swiper-pagination-bullet-active {
+    background-color: var(--abant-accent-color);
+    opacity: 1;
+}
+
+/* ----------------------------------------------------------------
+    4. Genel Buton Stilleri
+-----------------------------------------------------------------*/
+.btn {
+    border-radius: 30px;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+.btn-primary {
+    background-color: var(--abant-accent-color) !important;
+    border-color: var(--abant-accent-color) !important;
+    color: var(--abant-light-text-color) !important;
+}
+.btn-primary:hover {
+    background-color: #b88e58 !important;
+    border-color: #b88e58 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.btn-outline-light {
+     border-color: var(--abant-light-text-color) !important;
+     color: var(--abant-light-text-color) !important;
+}
+.btn-outline-light:hover {
+    background-color: var(--abant-light-text-color) !important;
+    color: var(--abant-primary-color) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+}
+.btn-secondary-abant {
+    background-color: var(--abant-secondary-color) !important;
+    border-color: var(--abant-secondary-color) !important;
+    color: var(--abant-light-text-color) !important;
+}
+.btn-secondary-abant:hover {
+    background-color: #936545 !important;
+    border-color: #936545 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.btn-link {
+    color: var(--abant-secondary-color);
+    text-decoration: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+.btn-link:hover {
+    color: var(--abant-primary-color);
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------------------------
+    5. Bölüm Stilleri ve Kartlar
+-----------------------------------------------------------------*/
+.section-padding {
+    padding: 4rem 0;
+}
+@media (min-width: 992px) {
+    .section-padding {
+        padding: 5rem 0;
+    }
+}
+.section-title {
+    text-align: center; /* Bu, içindeki inline ve inline-block öğeleri ve blok öğelerin metnini ortalar */
+    margin-bottom: 3.5rem;
+}
+
+.section-title .page-title {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    /* text-align: center; ARTIK GEREKLİ DEĞİL, .section-title'dan miras alır */
+}
+@media (min-width: 768px) {
+    .section-title .page-title {
+        font-size: 2.5rem;
+    }
+}
+
+.section-title .lead {
+    font-size: 1.05rem;
+    color: #777;
+    max-width: 650px;
+    margin-left: auto; /* max-width ile birlikte blok olarak ortalamak için */
+    margin-right: auto; /* max-width ile birlikte blok olarak ortalamak için */
+    /* text-align: center; ARTIK GEREKLİ DEĞİL, .section-title'dan miras alır,
+       ancak max-width kullanıldığı için metnin de ortalanması isteniyorsa buraya eklenebilir
+       veya .section-title'daki text-align:center zaten bunu sağlar. */
+}
+.feature-card .card {
+    border: 1px solid var(--abant-border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    background-color: var(--abant-card-bg);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    height: 100%;
+}
+.feature-card .card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.feature-card .card-body{
+    padding: 2.5rem;
+}
+.icon-feature {
+    margin-bottom: 1.5rem;
+}
+.icon-feature .icon-lg {
+    width: 52px;
+    height: 52px;
+    color: var(--abant-accent-color);
+}
+.feature-card .card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+.product-card .card {
+    border: 1px solid var(--abant-border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    background-color: var(--abant-card-bg);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    height: 100%;
+    overflow: hidden;
+}
+.product-card .card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.product-card .card-img-top-custom {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+.product-card .card:hover .card-img-top-custom {
+    transform: scale(1.05);
+}
+.product-card .card-body {
+    padding: 1.5rem;
+    text-align: center;
+}
+.product-card .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.product-card .text-muted.small {
+    font-size: 0.85rem;
+    min-height: 40px;
+    margin-bottom: 1rem;
+}
+.product-card .btn {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.85rem;
+}
+
+/* ----------------------------------------------------------------
+    6. Hikayemiz Bölümü
+-----------------------------------------------------------------*/
+.story-section img {
+    border-radius: 8px;
+    object-fit: cover;
+    height: 100%;
+    max-height: 480px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.story-section .lead {
+    font-size: 1.15rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+/* ----------------------------------------------------------------
+    7. Bayilik CTA Bölümü
+-----------------------------------------------------------------*/
+.bayilik-cta-section {
+    /* background-color: var(--abant-bg-light); */
+}
+.bayilik-cta-content {
+    background-color: var(--abant-primary-color);
+    color: var(--abant-light-text-color);
+    padding: 3rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+@media (min-width: 992px) {
+    .bayilik-cta-content {
+        padding: 4rem;
+    }
+}
+.bayilik-cta-content h2.page-title {
+    color: var(--abant-light-text-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+    .bayilik-cta-content h2.page-title {
+        font-size: 2.2rem;
+    }
+}
+.bayilik-cta-content p.lead {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 2rem;
+}
+
+/* ----------------------------------------------------------------
+    8. Blog Kartları
+-----------------------------------------------------------------*/
+.blog-card .card {
+    border: 1px solid var(--abant-border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    background-color: var(--abant-card-bg);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    height: 100%;
+    overflow: hidden;
+}
+.blog-card .card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.blog-card .card-img-top-custom {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+.blog-card .card:hover .card-img-top-custom {
+    transform: scale(1.05);
+}
+.blog-card .card-body {
+    padding: 1.5rem;
+}
+.blog-card .text-muted.small.mb-1,
+.blog-card .text-muted.small.mb-2 {
+    font-size: 0.8rem;
+    color: #888 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.blog-card .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+.blog-card .card-title a {
+    color: var(--abant-primary-color);
+}
+.blog-card .card-title a:hover {
+    color: var(--abant-accent-color);
+    text-decoration: none;
+}
+.blog-card .text-muted.small:not(.mb-1):not(.mb-2) {
+    font-size: 0.9rem;
+    min-height: 60px;
+    margin-bottom: 1rem;
+}
+
+/* ----------------------------------------------------------------
+    9. Footer (Saydam Kartlar, Belirgin Yazılar)
+-----------------------------------------------------------------*/
+.footer {
+    background-color: var(--abant-primary-color); /* Ana koyu kahve - Footer'ın genel arka planı */
+    color: #e0e0e0; /* Footer için genel daha açık metin rengi */
+    padding: 3.5rem 0 2.5rem 0;
+    font-size: 0.925rem;
+}
+
+/* Footer içindeki kartlar için genel stil */
+.footer-card {
+    background-color: transparent !important; /* KART ARKA PLANI SAYDAM */
+    border: 1px solid rgba(255, 255, 255, 0.2);  /* DAHA AÇIK VE BELİRGİN BİR ÇERÇEVE */
+    border-radius: 8px;
+    color: inherit; /* Footer'ın genel metin rengini alsın */
+    height: 100%;
+    padding: 0; /* Card'ın kendi padding'ini sıfırla, card-body yönetsin */
+}
+
+.footer-card .card-body {
+    padding: 1.75rem; /* Kart içi boşluk */
+}
+
+/* Logo kartı için özel bir arka plan yok, saydam olacak */
+.footer-card-logo .card-body { /* Sadece logo kartı için ekstra padding veya ayar gerekirse */
+    /* text-align: center; HTML'e eklendi */
+}
+
+.footer-card h5 {
+    color: var(--abant-light-text-color); /* Başlıklar için beyaz */
+    margin-bottom: 1.25rem;
+    font-family: var(--font-serif-headings);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.footer-card ul.list-unstyled li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-card ul.list-unstyled li a {
+    color: #d8c8b8; /* Link rengi (daha açık, sıcak bej) */
+    font-weight: 500; /* Linkler biraz daha belirgin */
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+.footer-card ul.list-unstyled li a:hover {
+    color: var(--abant-accent-color);
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+.footer .text-muted-footer { /* Logo altındaki açıklama */
+    color: #c8b8a8; /* Daha okunaklı bir açık ton */
+    line-height: 1.6;
+    font-size: 0.875rem;
+}
+
+.footer .contact-info i {
+    color: var(--abant-accent-color);
+    font-size: 1.05rem;
+    margin-top: 4px; /* Dikey hizalama için ince ayar */
+}
+.footer .contact-info span,
+.footer .contact-info a { /* İletişim metinleri ve linkleri */
+    color: #d8c8b8; /* Yazı rengi linklerle aynı */
+    font-size: 0.9rem;
+}
+.footer .contact-info a:hover {
+    color: var(--abant-accent-color);
+}
+
+.footer .social-icons a {
+    color: #d8c8b8; /* Sosyal ikon rengi */
+    font-size: 1.4rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.footer .social-icons a:hover {
+    color: var(--abant-accent-color);
+    transform: translateY(-2px);
+}
+
+/* Footer E-Bülten Formu (Kart içinde) */
+.footer-card #newsletter-form-footer h5 { /* E-bülten başlığı için de genel h5 stili geçerli olacak */
+    /* Özel bir stil gerekirse buraya */
+}
+.footer-card #newsletter-form-footer .form-control {
+    border-radius: 25px 0 0 25px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255,255,255,0.25); /* Border biraz daha belirgin */
+    background-color: rgba(255,255,255,0.08); /* Arka plan biraz daha açık */
+    color: var(--abant-light-text-color);
+    padding: 0.5rem 1rem;
+}
+.footer-card #newsletter-form-footer .form-control::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+.footer-card #newsletter-form-footer .btn {
+    border-radius: 0 25px 25px 0 !important;
+    background-color: var(--abant-accent-color) !important;
+    color: var(--abant-primary-color) !important;
+    border-color: var(--abant-accent-color) !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+}
+.footer-card #newsletter-form-footer .btn:hover {
+    background-color: #b88e58 !important;
+    border-color: #b88e58 !important;
+}
+
+/* Footer Alt Bar */
+.footer .bottom-bar {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 1.75rem; /* Biraz daha fazla boşluk */
+    margin-top: 3rem;
+    font-size: 0.875rem; /* Biraz daha büyük */
+    color: #b0a09a;
+}
+.footer .bottom-bar a {
+    color: #d0c0b0; /* Alt bar linkleri daha belirgin */
+    font-weight: 500;
+}
+ .footer .bottom-bar a:hover {
+    color: var(--abant-accent-color);
+}
+
+/* ----------------------------------------------------------------
+    X. İç Sayfa Başlığı (Page Header Section)
+-----------------------------------------------------------------*/
+.page-header-section {
+    background-size: cover;
+    background-position: center center;
+    padding: 5rem 0; /* Yüksekliği padding ile ayarlıyoruz */
+    position: relative;
+    color: var(--abant-light-text-color);
+}
+.page-header-section .slide-overlay { /* Ana sayfadakiyle aynı overlay */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Karartma miktarı ayarlanabilir */
+    z-index: 1;
+}
+.page-header-section .container {
+    position: relative;
+    z-index: 2;
+}
+.page-header-section .page-title-display { /* h1 için */
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--abant-light-text-color);
+    margin-bottom: 0.75rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+@media (min-width: 768px) {
+    .page-header-section .page-title-display {
+        font-size: 3.5rem;
+    }
+}
+.page-header-section .lead {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width: 768px) {
+    .page-header-section .lead {
+        font-size: 1.25rem;
+    }
+}
+
+/* Hakkımızda sayfasındaki içerik kartı için (isteğe bağlı) */
+.card-lg .card-body { /* Tabler'ın .card-lg'si varsa veya kendi özel sınıfımız */
+    padding: 2.5rem; /* Daha fazla iç boşluk */
+}
+.card-lg .card-title.h1 {
+    font-size: 2.2rem; /* Kart içindeki ana başlık */
+}
+
+/* Misyon Vizyon Kartları */
+.card.bg-light h4.card-title i {
+    position: relative;
+    top: 2px; /* İkonu metinle daha iyi hizala */
+}
+
+/* ----------------------------------------------------------------
+    10. Yardımcı Sınıflar ve Diğerleri
+-----------------------------------------------------------------*/
+.animate__animated {
+    /* --animate-duration: 0.8s; */
+}
+
+.ti {
+    vertical-align: middle;
+}
+
+/* ----------------------------------------------------------------
+    11. Mobil ve Tablet Navigasyon Düzeltmeleri (SON DENEME)
+-----------------------------------------------------------------*/
+@media (max-width: 767.98px) { /* Tabler'ın md breakpoint'i */
+
+    .navbar-light {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        background-color: var(--abant-card-bg) !important;
+        position: relative; /* Z-index'in çalışması için gerekli */
+        z-index: 1035; /* Navbar'ın kendisi için yüksek z-index */
+    }
+
+    .navbar-brand.d-md-none img {
+        max-height: 36px;
+    }
+
+    /* Çöken menü için ana konteyner */
+    #navbar-menu-main.navbar-collapse.collapse { /* Kapalı durum (Bootstrap halleder) */
+        display: none !important;
+    }
+    #navbar-menu-main.navbar-collapse.collapsing,
+    #navbar-menu-main.navbar-collapse.collapse.show { /* Açılma anı ve açık durum */
+        display: block !important; /* Blok olarak göster */
+        position: absolute; /* Navbar'ın altına konumlandır */
+        top: 100%; /* Parent'ın (navbar) hemen altından başla */
+        left: 0;
+        right: 0;
+        background-color: var(--abant-card-bg);
+        border-top: 1px solid var(--abant-border-color);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 1030; /* Navbar'ın (1035) altında, sayfanın üzerinde */
+        padding: 0;
+        /* Masaüstündeki flex ayarlarını sıfırla */
+        justify-content: flex-start !important;
+        flex-basis: auto !important;
+        flex-grow: 0 !important;
+    }
+
+    /* Mobil menüdeki UL listeleri (Sadece sol menü mobilde görünecek) */
+    #navbar-menu-main.navbar-collapse .navbar-nav {
+        width: 100%;
+        margin: 0 !important;
+        flex-direction: column !important;
+    }
+    /* Ortadaki logo ve Sağdaki sosyal medya zaten HTML'de mobilde gizli */
+    #navbar-menu-main > .navbar-brand.mx-auto,
+    #navbar-menu-main > .navbar-nav.ms-auto {
+        display: none !important; /* Mobilde kesinlikle görünmesinler */
+    }
+
+    /* Mobil menü linkleri */
+    .navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-item {
+        width: 100%;
+    }
+    .navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-link {
+        padding: 0.9rem 1.25rem;
+        font-size: 0.95rem;
+        text-transform: none;
+        border-bottom: 1px solid var(--abant-border-color);
+        width: 100%;
+        display: block;
+        text-align: left;
+        color: var(--abant-text-color) !important;
+    }
+    .navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-link:hover,
+    .navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-link.active {
+        background-color: var(--abant-bg-light);
+        color: var(--abant-accent-color) !important;
+    }
+    .navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+
+    /* Aktif menü öğesi için alt çizgi mobilde olmasın */
+    .navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-item.active > .nav-link::after {
+        display: none;
+    }
+
+    /* Dropdown menüler mobilde */
+    .navbar-nav .dropdown-menu {
+        box-shadow: none;
+        border: none;
+        margin-top: 0 !important;
+        border-radius: 0;
+        background-color: #fdf8f3;
+        width: 100%;
+        position: static !important;
+        float: none !important;
+        padding: 0;
+        /* border-bottom: 1px solid var(--abant-border-color); Bu, tüm dropdown bloğunun altına çizgi ekler */
+    }
+    .navbar-nav .dropdown-menu .dropdown-item {
+        padding: 0.8rem 1.25rem 0.8rem 2.25rem;
+        font-size: 0.9rem;
+        border-bottom: 1px dotted #ede7e0; /* Daha yumuşak bir ayırıcı */
+        color: var(--abant-text-color);
+    }
+     .navbar-nav .dropdown-menu .dropdown-item:last-child {
+        border-bottom: none;
+    }
+    .navbar-nav .dropdown-menu .dropdown-item:hover,
+    .navbar-nav .dropdown-menu .dropdown-item.active {
+        background-color: var(--abant-accent-color) !important;
+        color: var(--abant-light-text-color) !important;
+    }
+
+    .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: auto; /* Oku sağa yasla */
+        margin-top: 0.4em; /* Dikey hizalama için */
+        transition: transform 0.2s ease-in-out;
+    }
+    .navbar-light #navbar-menu-main > .navbar-nav.me-auto .nav-link.dropdown-toggle {
+        display: flex; /* Metin sola, ok sağa */
+        justify-content: space-between;
+        align-items: center;
+    }
+    .navbar-nav .nav-item.dropdown.show .dropdown-toggle::after {
+        transform: rotate(180deg);
+    }
+}

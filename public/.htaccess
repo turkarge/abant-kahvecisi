@@ -1,0 +1,20 @@
+# public/.htaccess
+Options -Indexes
+RewriteEngine On
+
+# HTTPS'ye Zorla (Canlı sunucuda SSL varsa etkinleştirin, localhost'ta gerekmeyebilir)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# www olmayan adresten www'li adrese yönlendirme (veya tam tersi - tercih sizin)
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# Trailing slash (sondaki /) kaldırma/ekleme (isteğe bağlı)
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# Dosya veya dizin değilse tüm istekleri index.php'ye yönlendir
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
